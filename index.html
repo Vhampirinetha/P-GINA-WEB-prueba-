@@ -1,69 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="utf-8">
-    <title>lista de opciones</title>
-
-    <!-- AQUI SE CONECTA EL CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATELIERLDIC AUDIO | Catálogo de Audífonos de Alta Fidelidad</title>
+    
+    <!-- Tipografía Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Hoja de estilos externa -->
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<header>
-    <h1>lista de opciones</h1>
-</header>
+    <!-- 1. ENCABEZADO Y NAVEGACIÓN -->
+    <header class="header">
+        <div class="contenedor header-contenido">
+            <div class="logo">
+                <span class="logo-icono">🎧</span>
+                <div>
+                    <h1>ATELIERLDIC</h1>
+                    <span class="logo-subtitulo">AUDIO & CUERO ITALIANO</span>
+                </div>
+            </div>
 
-<nav>
-    <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Contenido</a></li>
-        <li><a href="#">Requisitos</a></li>
-        <li><a href="#">Lenguajes</a></li>
-        <li><a href="#">Frameworks</a></li>
-        <li><a href="#">Proyectos</a></li>
-    </ul>
-</nav>
+            <nav class="navegacion">
+                <a href="#inicio">Inicio</a>
+                <a href="#destacado">Destacado</a>
+                <a href="#catalogo">Catálogo</a>
+                <a href="#acerca">Acerca de</a>
+            </nav>
 
-<div class="clearfix"></div>
+            <!-- Botón del Carrito en el Header -->
+            <button id="btn-abrir-carrito" class="btn-carrito" aria-label="Abrir carrito de compras">
+                🛒 Carrito (<span id="conteo-carrito">0</span>)
+            </button>
+        </div>
+    </header>
 
-<section id="content">
+    <main>
+        <!-- 2. SECCIÓN INICIO / HERO -->
+        <section id="inicio" class="hero">
+            <div class="contenedor hero-grid">
+                <div class="hero-texto">
+                    <span class="etiqueta">Edición Especial 2026</span>
+                    <h2>El Arte del Buen Sonido, En Sombras de Café y Cuero.</h2>
+                    <p>
+                        Explora nuestra colección de 20 audífonos de referencia mundial.
+                        Diseñados para audiófilos y amantes del sonido puro, con precios para Colombia en pesos (COP).
+                    </p>
+                    <div class="hero-botones">
+                        <a href="#catalogo" class="btn btn-primario">Ver Catálogo Completo</a>
+                        <a href="#destacado" class="btn btn-secundario">Conocer el Destacado</a>
+                    </div>
+                </div>
+                <div class="hero-imagen">
+                    <img src="images/huawei-freebuds-pro-5.png" alt="Huawei FreeBuds Pro 5" onerror="this.src='https://placehold.co/500x500/3b2418/e8dcc8?text=Huawei+FreeBuds+Pro+5'">
+                </div>
+            </div>
+        </section>
 
-    <article class="article">
-        <h2>d4vd encarcelado</h2>
-        <p>te extraño celeste</p>
-	<img src="ohceleste.png">
-    </article>
+        <!-- 3. SECCIÓN DESTACADO (HUAWEI FREEBUDS PRO 5) -->
+        <section id="destacado" class="seccion-destacado">
+            <div class="contenedor">
+                <div class="tarjeta-destacado">
+                    <div class="destacado-imagen">
+                        <img src="images/huawei-freebuds-pro-5.png" alt="Huawei FreeBuds Pro 5" onerror="this.src='https://placehold.co/450x450/3b2418/e8dcc8?text=Huawei+FreeBuds+Pro+5'">
+                    </div>
+                    <div class="destacado-info">
+                        <span class="etiqueta">BUQUE INSIGNIA RECOMENDADO</span>
+                        <h3>Huawei FreeBuds Pro 5</h3>
+                        <p>
+                            Audífonos estrella con arquitectura acústica de doble transductor (diafragma planar para agudos y dinámico de 11mm para graves profundos). Cuentan con cancelación activa inteligente ANC 3.0.
+                        </p>
+                        <div class="destacado-precio-fila">
+                            <span class="precio">$ 1.199.000 COP</span>
+                            <button class="btn btn-primario" onclick="abrirModal(2)">Ver Ficha Técnica</button>
+                            <button class="btn btn-secundario" onclick="agregarAlCarrito(2)">+ Agregar al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- 4. SECCIÓN CATÁLOGO (BÚSQUEDA, FILTROS Y GRILLA DE 20 PRODUCTOS) -->
+        <section id="catalogo" class="seccion-catalogo">
+            <div class="contenedor">
+                <div class="encabezado-seccion">
+                    <span class="etiqueta">Catálogo Completo</span>
+                    <h2>Nuestra Colección de Audífonos</h2>
+                    <p>Filtra por tipo de audífono o escribe en el buscador para encontrar tu modelo ideal.</p>
+                </div>
 
-    <article class="article">
-        <h2>exposicion al vacío</h2>
-        <p>adqueres la exposicion más absoluta al vacío</p>
-	<img src="blackhole.png">
-    </article>
+                <!-- Barra de búsqueda y categorías -->
+                <div class="panel-filtros">
+                    <input type="text" id="buscador" placeholder="Buscar por marca o modelo (ej. Sony, Bose, JBL, Marshall)...">
+                    
+                    <div class="botones-filtro">
+                        <button class="btn-filtro activo" data-categoria="todos">Todos (20)</button>
+                        <button class="btn-filtro" data-categoria="Over-Ear">Diadema (Over-Ear)</button>
+                        <button class="btn-filtro" data-categoria="In-Ear">True Wireless (In-Ear)</button>
+                    </div>
+                </div>
 
-    <article class="article">
-        <h2>huawei mate 80RS</h2>
-        <p>obtienes el huawei 80RS ultimate desing de 2TB</p>
-	<img src="HuaweiMate80Ultimate.png">
-    </article>
+                <!-- Grilla dinámica con los 20 productos -->
+                <div id="grilla-productos" class="grilla-productos">
+                    <!-- Los productos se cargan desde script.js -->
+                </div>
+            </div>
+        </section>
 
-</section>
+        <!-- 5. SECCIÓN ACERCA DE -->
+        <section id="acerca" class="seccion-acerca">
+            <div class="contenedor">
+                <div class="tarjeta-acerca">
+                    <h3>Sobre ATELIERLDIC AUDIO</h3>
+                    <p>
+                        Somos un catálogo web dedicado a la curaduría acústica de audífonos de gama alta.
+                        Combinamos una estética visual monocromática inspirada en el cuero italiano y los tonos café,
+                        con información clara, especificaciones reales y precios de referencia en pesos colombianos (COP).
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<aside>
-    <h2>Barra lateral</h2>
-    <form>
-        <input type="text">
-        <input type="submit" value="Buscar">
-    </form>
-</aside>
+    <!-- 6. VENTANA MODAL (DETALLES COMPLETOS DEL PRODUCTO) -->
+    <div id="modal-producto" class="modal-fondo oculto">
+        <div class="modal-contenido">
+            <button id="btn-cerrar-modal" class="btn-cerrar">&times;</button>
+            <div id="modal-cuerpo" class="modal-grid">
+                <!-- Se inyecta con JavaScript -->
+            </div>
+        </div>
+    </div>
 
-<div class="clearfix"></div>
+    <!-- 7. GAVETA LATERAL DEL CARRITO DE COMPRAS -->
+    <div id="carrito-fondo" class="carrito-fondo oculto">
+        <aside class="carrito-panel">
+            <div class="carrito-cabecera">
+                <h3>Tu Carrito</h3>
+                <button id="btn-cerrar-carrito" class="btn-cerrar">&times;</button>
+            </div>
 
-<footer>
-    Maquetación con CSS
-</footer>
+            <!-- Lista de productos en el carrito -->
+            <div id="lista-carrito" class="carrito-lista">
+                <!-- Se inyecta con JavaScript -->
+            </div>
 
+            <!-- Total y Botón de Checkout -->
+            <div class="carrito-pie">
+                <div class="fila-total">
+                    <span>Total Estimado:</span>
+                    <strong id="total-carrito">$ 0 COP</strong>
+                </div>
+                <button id="btn-checkout" class="btn btn-primario btn-bloque">Finalizar Pedido por WhatsApp</button>
+                <button id="btn-vaciar-carrito" class="btn-enlace">Vaciar Carrito</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 8. PIE DE PÁGINA -->
+    <footer class="footer">
+        <div class="contenedor">
+            <p>&copy; 2026 ATELIERLDIC AUDIO - Proyecto de Catálogo Web en HTML, CSS y JavaScript Vainilla.</p>
+        </div>
+    </footer>
+
+    <!-- Script de lógica en JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,91 +1,722 @@
-/* RESET GENERAL */
-*{
+/* ==========================================================================
+   ATELIERLDIC AUDIO - HOJA DE ESTILOS (styles.css)
+   Paleta: Monocromática en tonos café, marrón cuero y crema con glassmorphism
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES CSS (PALETA DE COLORES Y TIPOGRAFÍA)
+   -------------------------------------------------------------------------- */
+:root {
+    /* Paleta de tonos cafés requerida */
+    --color-marron-oscuro: #3B2418; /* Color base oscuro */
+    --color-cafe-medio:    #65452F; /* Café para botones y acentos */
+    --color-cuero-marron:  #815C40; /* Tono de cuero italiano */
+    --color-beige:         #B49A7A; /* Beige para bordes y texto secundario */
+    --color-crema:         #E8DCC8; /* Crema para títulos y textos principales */
+    --color-fondo-negro:   #150c08; /* Fondo más profundo */
+
+    /* Glassmorphism y bordes */
+    --fondo-cristal:       rgba(59, 36, 24, 0.65);
+    --borde-cristal:       rgba(180, 154, 122, 0.25);
+    --sombra-tarjeta:      0 10px 30px rgba(0, 0, 0, 0.5);
+
+    /* Tipografías */
+    --fuente-titulos: 'Playfair Display', Georgia, serif;
+    --fuente-cuerpo:  'Montserrat', -apple-system, sans-serif;
+
+    /* Radios y transiciones */
+    --radio-borde: 14px;
+    --transicion: 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. REINICIO BÁSICO (RESET) Y CUERPO
+   -------------------------------------------------------------------------- */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ESTILO GENERAL DEL SITIO */
-body{
-    background: #f1f5f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
 }
 
-/* HEADER */
-header{
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    color: white;
-    height: 100px;
-    text-align: center;
-    line-height: 100px;
-    font-size: 28px;
-    font-weight: bold;
+body {
+    font-family: var(--fuente-cuerpo);
+    color: var(--color-crema);
+    background-color: var(--color-fondo-negro);
+    /* Fondo con degradado radial que simula la textura y calidez del cuero oscuro */
+    background-image: 
+        radial-gradient(circle at 50% 0%, #3B2418 0%, #1c100a 50%, #100704 100%);
+    background-attachment: fixed;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
-/* MENU NAVEGACION */
-nav{
-    background: #0ea5e9;
-    height: 50px;
-    border-bottom: 3px solid #0369a1;
+/* Contenedor central para alinear contenido */
+.contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-nav ul li{
-    float: left;
-    list-style: none;
-    margin: 10px 20px;
-    line-height: 30px;
+/* Clases de utilidad */
+.oculto {
+    display: none !important;
 }
 
-nav ul li a{
-    color: white;
+.etiqueta {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-beige);
+    background: rgba(101, 69, 47, 0.4);
+    border: 1px solid var(--borde-cristal);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   3. BOTONES
+   -------------------------------------------------------------------------- */
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
     text-decoration: none;
-    font-weight: bold;
+    border: none;
+    transition: var(--transicion);
 }
 
-nav ul li a:hover{
-    color: #fde047;
+.btn-primario {
+    background-color: var(--color-cuero-marron);
+    color: #fff;
+    border: 1px solid var(--color-beige);
 }
 
-/* LIMPIAR FLOTANTES */
-.clearfix{
-    clear: both;
+.btn-primario:hover {
+    background-color: var(--color-cafe-medio);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(129, 92, 64, 0.4);
 }
 
-/* CONTENIDO PRINCIPAL */
-#content{
-    float: left;
-    width: 80%;
-    background: white;
-    min-height: 500px;
-    padding: 25px;
-    border-radius: 8px;
+.btn-secundario {
+    background-color: rgba(59, 36, 24, 0.6);
+    color: var(--color-crema);
+    border: 1px solid var(--borde-cristal);
 }
 
-/* ARTICULOS */
-.article{
-    color: #334155;
-    margin-top: 15px;
+.btn-secundario:hover {
+    background-color: var(--color-cuero-marron);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-bloque {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-enlace {
+    background: none;
+    border: none;
+    color: var(--color-beige);
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    margin-top: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   4. ENCABEZADO (HEADER) Y NAVEGACIÓN
+   -------------------------------------------------------------------------- */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(21, 12, 8, 0.85);
+    backdrop-filter: blur(12px); /* Efecto Glassmorphism */
+    border-bottom: 1px solid var(--borde-cristal);
+    padding: 14px 0;
+}
+
+.header-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icono {
+    font-size: 1.8rem;
+}
+
+.logo h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.3rem;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.logo-subtitulo {
+    font-size: 0.65rem;
+    color: var(--color-beige);
+    letter-spacing: 2px;
+    display: block;
+}
+
+.navegacion {
+    display: flex;
+    gap: 20px;
+}
+
+.navegacion a {
+    color: var(--color-crema);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transicion);
+}
+
+.navegacion a:hover {
+    color: var(--color-beige);
+}
+
+.btn-carrito {
+    background: var(--color-cafe-medio);
+    color: #fff;
+    border: 1px solid var(--color-beige);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--transicion);
+}
+
+.btn-carrito:hover {
+    background: var(--color-cuero-marron);
+    transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   5. SECCIÓN HERO (INICIO)
+   -------------------------------------------------------------------------- */
+.hero {
+    padding: 60px 0;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero-texto h2 {
+    font-family: var(--fuente-titulos);
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.hero-texto p {
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+    color: var(--color-crema);
+    opacity: 0.9;
+}
+
+.hero-botones {
+    display: flex;
+    gap: 15px;
+}
+
+.hero-imagen img {
+    width: 100%;
+    max-height: 380px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
+    transition: var(--transicion);
+}
+
+.hero-imagen img:hover {
+    transform: scale(1.04);
+}
+
+/* --------------------------------------------------------------------------
+   6. SECCIÓN PRODUCTO DESTACADO (HUAWEI FREEBUDS PRO 5)
+   -------------------------------------------------------------------------- */
+.seccion-destacado {
+    padding: 40px 0;
+}
+
+.tarjeta-destacado {
+    background: var(--fondo-cristal);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-cuero-marron);
+    border-radius: var(--radio-borde);
+    padding: 35px;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 30px;
+    align-items: center;
+    box-shadow: var(--sombra-tarjeta);
+}
+
+.destacado-imagen img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+}
+
+.destacado-info h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.destacado-info p {
+    margin-bottom: 20px;
+    opacity: 0.88;
+}
+
+.destacado-precio-fila {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.destacado-precio-fila .precio {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-beige);
+}
+
+/* --------------------------------------------------------------------------
+   7. SECCIÓN CATÁLOGO (FILTROS Y GRILLA DE PRODUCTOS)
+   -------------------------------------------------------------------------- */
+.seccion-catalogo {
+    padding: 60px 0;
+}
+
+.encabezado-seccion {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.encabezado-seccion h2 {
+    font-family: var(--fuente-titulos);
+    font-size: 2.2rem;
+    color: #fff;
+}
+
+.encabezado-seccion p {
+    color: var(--color-beige);
+}
+
+/* Panel de búsqueda y botones de filtro */
+.panel-filtros {
+    background: var(--fondo-cristal);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--borde-cristal);
+    border-radius: var(--radio-borde);
+    padding: 20px;
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#buscador {
+    width: 100%;
+    padding: 12px 18px;
+    background: rgba(21, 12, 8, 0.7);
+    border: 1px solid var(--borde-cristal);
+    border-radius: 25px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+#buscador:focus {
+    border-color: var(--color-beige);
+}
+
+.botones-filtro {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-filtro {
+    background: rgba(59, 36, 24, 0.4);
+    color: var(--color-crema);
+    border: 1px solid var(--borde-cristal);
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transicion);
+}
+
+.btn-filtro:hover, .btn-filtro.activo {
+    background: var(--color-cuero-marron);
+    color: #fff;
+    border-color: var(--color-beige);
+}
+
+/* Grilla con repeat(auto-fit, minmax(260px, 1fr)) */
+.grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* Tarjeta individual de cada audífono */
+.tarjeta-producto {
+    background: var(--fondo-cristal);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--borde-cristal);
+    border-radius: var(--radio-borde);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--sombra-tarjeta);
+    transition: var(--transicion);
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-beige);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+}
+
+.tarjeta-img {
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 15px;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 12px;
+    cursor: pointer;
 }
 
-/* BARRA LATERAL */
-aside{
-    float: left;
-    width: 20%;
-    background: linear-gradient(180deg, #38bdf8, #0ea5e9);
-    color: white;
-    min-height: 500px;
+.tarjeta-img img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+    transition: var(--transicion);
+}
+
+.tarjeta-producto:hover .tarjeta-img img {
+    transform: scale(1.07);
+}
+
+.tarjeta-categoria {
+    font-size: 0.7rem;
+    color: var(--color-beige);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tarjeta-titulo {
+    font-size: 1.15rem;
+    color: #fff;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.tarjeta-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.tarjeta-pie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--borde-cristal);
+    padding-top: 12px;
+    margin-top: auto;
+}
+
+.tarjeta-precio {
+    font-weight: 700;
+    color: var(--color-beige);
+    font-size: 1rem;
+}
+
+.tarjeta-acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icono {
+    background: rgba(101, 69, 47, 0.4);
+    border: 1px solid var(--borde-cristal);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transicion);
+}
+
+.btn-icono:hover {
+    background: var(--color-cuero-marron);
+    border-color: var(--color-beige);
+}
+
+/* --------------------------------------------------------------------------
+   8. VENTANA MODAL (DETALLES DEL PRODUCTO)
+   -------------------------------------------------------------------------- */
+.modal-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(10, 6, 4, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
 }
 
-/* FOOTER */
-footer{
-    background: #1e293b;
-    color: white;
+.modal-contenido {
+    background: linear-gradient(145deg, #2c1a11 0%, #170d08 100%);
+    border: 1px solid var(--color-beige);
+    border-radius: var(--radio-borde);
+    max-width: 750px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--color-crema);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-cerrar:hover {
+    color: #fff;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 25px;
+    align-items: center;
+}
+
+.modal-img-col img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+}
+
+.modal-info-col h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.modal-precio {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-beige);
+    margin-bottom: 12px;
+}
+
+.modal-descripcion {
+    font-size: 0.9rem;
+    opacity: 0.88;
+    margin-bottom: 15px;
+}
+
+.modal-specs {
+    list-style: none;
+    font-size: 0.85rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-specs strong {
+    color: var(--color-beige);
+}
+
+/* --------------------------------------------------------------------------
+   9. GAVETA DEL CARRITO DE COMPRAS
+   -------------------------------------------------------------------------- */
+.carrito-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 250;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.carrito-panel {
+    width: 100%;
+    max-width: 380px;
+    height: 100%;
+    background: #1c100a;
+    border-left: 1px solid var(--borde-cristal);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carrito-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--borde-cristal);
+    padding-bottom: 15px;
+}
+
+.carrito-cabecera h3 {
+    font-family: var(--fuente-titulos);
+    color: #fff;
+}
+
+.carrito-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.carrito-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(59, 36, 24, 0.35);
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--borde-cristal);
+    font-size: 0.85rem;
+}
+
+.carrito-item-info strong {
+    display: block;
+    color: #fff;
+}
+
+.carrito-item-btn-quitar {
+    background: none;
+    border: none;
+    color: #ff8a80;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 4px;
+}
+
+.carrito-pie {
+    border-top: 1px solid var(--borde-cristal);
+    padding-top: 15px;
+}
+
+.fila-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.fila-total strong {
+    color: var(--color-beige);
+}
+
+/* --------------------------------------------------------------------------
+   10. SECCIÓN ACERCA DE Y PIE DE PÁGINA (FOOTER)
+   -------------------------------------------------------------------------- */
+.seccion-acerca {
+    padding: 40px 0;
+}
+
+.tarjeta-acerca {
+    background: var(--fondo-cristal);
+    border: 1px solid var(--borde-cristal);
+    border-radius: var(--radio-borde);
+    padding: 30px;
     text-align: center;
-    height: 50px;
-    line-height: 50px;
-    margin-top: 10px;
+}
+
+.tarjeta-acerca h3 {
+    font-family: var(--fuente-titulos);
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.footer {
+    border-top: 1px solid var(--borde-cristal);
+    padding: 25px 0;
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   11. DISEÑO RESPONSIVO (MÓVILES Y PANTALLAS PEQUEÑAS)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .navegacion {
+        display: none; /* Simplificado para pantallas móviles */
+    }
+
+    .hero-grid, .tarjeta-destacado, .modal-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-botones, .destacado-precio-fila {
+        justify-content: center;
+    }
+
+    .hero-texto h2 {
+        font-size: 2rem;
+    }
 }
